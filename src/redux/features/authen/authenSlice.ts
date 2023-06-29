@@ -1,7 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+type UserAuthen = {
+  user: {
+    id: 2;
+    username: string;
+    fullname: string;
+    address: string;
+    email: string;
+    phonenumber: string;
+    dob: string;
+    roles: string;
+  };
+  token: string;
+  refreshToken: string;
+};
+
 interface AuthenSlice {
-  user: any;
+  user: UserAuthen | null;
   isSignedIn: boolean;
 }
 
@@ -16,9 +31,11 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
+      state.isSignedIn = true;
     },
+    logout: () => initialState,
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, logout } = userSlice.actions;
 export default userSlice.reducer;

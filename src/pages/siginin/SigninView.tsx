@@ -2,12 +2,18 @@ import React from "react";
 import { Button, Card, Checkbox, Form, Input } from "antd";
 
 interface props {
+  errorMessage: string;
   onFinish: (values: any) => void;
   onFinishFailed: (errorInfo: any) => void;
   toSignupPage: () => void;
 }
 
-const SigninView = ({ onFinish, onFinishFailed, toSignupPage }: props) => (
+const SigninView = ({
+  onFinish,
+  onFinishFailed,
+  toSignupPage,
+  errorMessage,
+}: props) => (
   <div
     className="height-full-screen width-full-screen"
     style={{ display: "flex", alignItems: "center", justifyContent: "center" }}
@@ -37,6 +43,7 @@ const SigninView = ({ onFinish, onFinishFailed, toSignupPage }: props) => (
         >
           <Input.Password />
         </Form.Item>
+        {errorMessage ? <p style={{ color: "red" }}>{errorMessage}</p> : null}
         <div
           style={{ width: "100%", display: "flex", justifyContent: "center" }}
         >

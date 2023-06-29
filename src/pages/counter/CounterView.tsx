@@ -19,11 +19,12 @@ export const CounterView = ({
 }: props) => {
   return (
     <div
-      className="height-full-screen width-full-screen"
+      className="width-full-screen"
       style={{
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        height: "86vh",
       }}
     >
       <Card style={{ minWidth: 500, textAlign: "center" }}>

@@ -6,6 +6,9 @@ import SignupPage from "../pages/signup";
 import { PrivateRoute } from "./PrivateRoute";
 import CounterPage from "../pages/counter";
 import HomePage from "../pages/home";
+import { AdminContainer } from "../pages/authorization/AdminContainer";
+import { UserContainer } from "../pages/authorization/UserContainer";
+import { ModeratorContainer } from "../pages/authorization/ModContainer";
 
 const Router = () => {
   return (
@@ -29,6 +32,21 @@ const Router = () => {
           path="counter"
           errorElement={<ErrorSite />}
           element={<CounterPage />}
+        />
+        <Route
+          path="admin"
+          errorElement={<ErrorSite />}
+          element={<AdminContainer />}
+        />
+        <Route
+          path="user"
+          errorElement={<ErrorSite />}
+          element={<UserContainer />}
+        />
+        <Route
+          path="mod"
+          errorElement={<ErrorSite />}
+          element={<ModeratorContainer />}
         />
       </Route>
       <Route path="*" element={<NotFound />} />
