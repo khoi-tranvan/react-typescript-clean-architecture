@@ -1,6 +1,8 @@
 import { Breadcrumb, Button, Layout, Menu, theme, Typography } from "antd";
-
-export const UserContainer = () => (
+interface props {
+  data: string;
+}
+export const TimeSleepView = ({ data }: props) => (
   <div
     className="width-full-screen"
     style={{
@@ -10,6 +12,6 @@ export const UserContainer = () => (
       height: "86vh",
     }}
   >
-    <Typography.Title className="gardient-color">User site.</Typography.Title>
+    <Typography.Title className="gardient-color">{data}</Typography.Title>
   </div>
 );

@@ -6,15 +6,18 @@ import SignupPage from "../pages/signup";
 import { PrivateRoute } from "./PrivateRoute";
 import CounterPage from "../pages/counter";
 import HomePage from "../pages/home";
-import { AdminContainer } from "../pages/authorization/AdminContainer";
-import { UserContainer } from "../pages/authorization/UserContainer";
-import { ModeratorContainer } from "../pages/authorization/ModContainer";
+import React from "react";
+import { Spin } from "antd";
+
+import AdminPage from "../pages/admin";
+import UserPage from "../pages/user";
+import ModeratorPage from "../pages/moderator";
+import TimeSleepPage from "../pages/time-sleep";
 
 const Router = () => {
   return (
     <Routes>
       <Route path="/" errorElement={<ErrorSite />} element={<HomePage />} />
-
       <Route path="/authen">
         <Route
           path="signin"
@@ -36,17 +39,22 @@ const Router = () => {
         <Route
           path="admin"
           errorElement={<ErrorSite />}
-          element={<AdminContainer />}
+          element={<AdminPage />}
         />
         <Route
           path="user"
           errorElement={<ErrorSite />}
-          element={<UserContainer />}
+          element={<UserPage />}
         />
         <Route
           path="mod"
           errorElement={<ErrorSite />}
-          element={<ModeratorContainer />}
+          element={<ModeratorPage />}
+        />
+        <Route
+          path="time"
+          errorElement={<ErrorSite />}
+          element={<TimeSleepPage />}
         />
       </Route>
       <Route path="*" element={<NotFound />} />

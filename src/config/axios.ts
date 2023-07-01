@@ -1,26 +1,17 @@
 import axios from "axios";
 import queryString from "query-string";
 import { ENV } from "./CONSTANT";
+import { LocalStorageService } from "../services/localStorage";
+import { setIsLoading } from "../redux/features/app/appSlice";
+import { store } from "../redux/store";
 // https://lightrains.com/blogs/axios-intercepetors-react/
 
 // control api call
 const controller = new AbortController();
 const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
-
-const AuthService = {
-  getUserInfo: () => {
-    return JSON.parse(localStorage.getItem("user") || "{}");
-  },
-  getAccessToken: () => {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    return user?.token;
-  },
-  getRefreshToken: () => {
-    const user = JSON.parse(localStorage.getItem("user") || "{}");
-    return user?.refreshToken;
-  },
-};
+let numberOfAjaxCallPending = 0;
+const { dispatch } = store;
 
 const axiosConfig = axios.create({
   baseURL: process.env.REACT_APP_API_END_POINT,
@@ -32,7 +23,11 @@ const axiosConfig = axios.create({
 
 axiosConfig.interceptors.request.use(
   (config) => {
-    const token = AuthService.getAccessToken();
+    // show loader
+    dispatch(setIsLoading(true));
+
+    numberOfAjaxCallPending++;
+    const token = LocalStorageService.getAccessToken();
     if (token && config.headers) {
       config.headers["Authorization"] = "Bearer " + token;
     }
@@ -48,9 +43,19 @@ axiosConfig.interceptors.request.use(
 
 axiosConfig.interceptors.response.use(
   (response) => {
+    numberOfAjaxCallPending--;
+    if (numberOfAjaxCallPending === 0) {
+      // close loader
+      dispatch(setIsLoading(false));
+    }
     return response;
   },
   async (error) => {
+    numberOfAjaxCallPending--;
+    if (numberOfAjaxCallPending === 0) {
+      // close loader
+      dispatch(setIsLoading(false));
+    }
     if (!window.navigator.onLine) {
       window.location.reload();
       return;
@@ -61,11 +66,11 @@ axiosConfig.interceptors.response.use(
         const response = await axios.post(
           "/auth/refresh",
           {
-            refreshToken: AuthService.getRefreshToken(),
+            refreshToken: LocalStorageService.getRefreshToken(),
           },
           {
             headers: {
-              Authorization: "Bearer " + AuthService.getAccessToken(), //the token is a variable which holds the token
+              Authorization: "Bearer " + LocalStorageService.getAccessToken(), //the token is a variable which holds the token
             },
             baseURL: process.env.REACT_APP_API_END_POINT,
             timeout: ENV.TIMEOUT,

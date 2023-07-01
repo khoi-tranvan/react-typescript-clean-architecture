@@ -8,7 +8,11 @@ import {
   theme,
   Typography,
 } from "antd";
-import { CalculatorOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  CalculatorOutlined,
+  UserOutlined,
+  FieldTimeOutlined,
+} from "@ant-design/icons";
 
 const { Header, Content, Footer } = Layout;
 
@@ -32,6 +36,11 @@ const menuItems: MenuProps["items"] = [
     label: "Normal User",
     key: "USER",
     icon: <UserOutlined />,
+  },
+  {
+    label: "Time sleep",
+    key: "TIME",
+    icon: <FieldTimeOutlined />,
   },
 ];
 

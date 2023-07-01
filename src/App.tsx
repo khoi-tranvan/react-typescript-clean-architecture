@@ -4,12 +4,14 @@ import "./App.css";
 import { ConfigProvider } from "antd";
 import AppTheme from "./config/theme";
 import Router from "./navigation";
-import { RouterProvider } from "react-router-dom";
+import LoadingComponent from "./components/Loading";
 
 function App() {
   return (
     <ConfigProvider theme={AppTheme}>
-      <Router />
+      <LoadingComponent>
+        <Router />
+      </LoadingComponent>
     </ConfigProvider>
   );
 }

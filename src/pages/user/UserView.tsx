@@ -1,6 +1,8 @@
 import { Breadcrumb, Button, Layout, Menu, theme, Typography } from "antd";
-
-export const AdminContainer = () => (
+interface props {
+  data: string;
+}
+export const UserView = ({ data }: props) => (
   <div
     className="width-full-screen"
     style={{
@@ -10,6 +12,6 @@ export const AdminContainer = () => (
       height: "86vh",
     }}
   >
-    <Typography.Title className="gardient-color">Admin site.</Typography.Title>
+    <Typography.Title className="gardient-color">{data}</Typography.Title>
   </div>
 );

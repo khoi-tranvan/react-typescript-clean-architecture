@@ -1,6 +1,8 @@
 import { Breadcrumb, Button, Layout, Menu, theme, Typography } from "antd";
-
-export const ModeratorContainer = () => (
+interface props {
+  data: string;
+}
+export const ModeratorView = ({ data }: props) => (
   <div
     className="width-full-screen"
     style={{
@@ -10,8 +12,6 @@ export const ModeratorContainer = () => (
       height: "86vh",
     }}
   >
-    <Typography.Title className="gardient-color">
-      Moderator site.
-    </Typography.Title>
+    <Typography.Title className="gardient-color">{data}</Typography.Title>
   </div>
 );

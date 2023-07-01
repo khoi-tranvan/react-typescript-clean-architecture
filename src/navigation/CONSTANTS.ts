@@ -10,4 +10,5 @@ export const PRIVATE_ROUTE: any = {
   ADMIN: "/app/admin",
   USER: "/app/user",
   MOD: "/app/mod",
+  TIME: "/app/time",
 };
