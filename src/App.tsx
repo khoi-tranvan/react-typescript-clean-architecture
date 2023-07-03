@@ -1,17 +1,22 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { ConfigProvider } from "antd";
-import AppTheme from "./config/theme";
-import Router from "./navigation";
-import LoadingComponent from "./components/Loading";
+import AppTheme from "./assets/styles/theme";
+import Router from "./presentation/router/Router";
+import { AuthUseCaseInterface } from "./application/usecases/AuthUseCase";
+import { TestUseCaseInterface } from "./application/usecases/TestUseCase";
+import { UserStorageUseCaseInterface } from "./application/usecases/UserStorageUseCase";
 
-function App() {
+export interface AppProps {
+  authUseCase: AuthUseCaseInterface;
+  testUseCase: TestUseCaseInterface;
+  userStorageUseCase: UserStorageUseCaseInterface;
+}
+
+function App(appProps: AppProps) {
   return (
     <ConfigProvider theme={AppTheme}>
-      <LoadingComponent>
-        <Router />
-      </LoadingComponent>
+      <Router {...appProps} />
     </ConfigProvider>
   );
 }
