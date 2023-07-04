@@ -1,6 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import ErrorSite from "./components/Error";
-import { AppProps } from "../../App";
 import { SignInPage } from "../pages/SignInPage";
 import { SignUpPage } from "../pages/SignUpPage";
 import { HomePage } from "../pages/HomePage";
@@ -12,6 +10,8 @@ import { TimeSleepPage } from "../pages/TimeSleepPage";
 import LoadingComponent from "./components/Loading";
 import { PrivateRoute } from "./components/PrivateRoute";
 import NotFound from "./components/NotFound";
+import { AppProps } from "../App";
+import ErrorSite from "./components/Error";
 
 const Router = (props: AppProps) => {
   return (

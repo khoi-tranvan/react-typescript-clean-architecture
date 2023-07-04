@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.scss";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
@@ -13,6 +12,7 @@ import { UserStorage } from "./infrastructure/storage/UserStorage";
 import { UserStorageUseCase } from "./application/usecases/UserStorageUseCase";
 import { TestAPI } from "./infrastructure/api/TestAPI";
 import { TestUseCase } from "./application/usecases/TestUseCase";
+import App from "./presentation/App";
 
 const authRepository = new AuthAPI();
 const userStorage = new UserStorage();

@@ -1,11 +1,11 @@
 import React from "react";
 import "./App.css";
 import { ConfigProvider } from "antd";
-import AppTheme from "./assets/styles/theme";
-import Router from "./presentation/router/Router";
-import { AuthUseCaseInterface } from "./application/usecases/AuthUseCase";
-import { TestUseCaseInterface } from "./application/usecases/TestUseCase";
-import { UserStorageUseCaseInterface } from "./application/usecases/UserStorageUseCase";
+import AppTheme from "../assets/styles/theme";
+import Router from "./router/Router";
+import { AuthUseCaseInterface } from "../application/usecases/AuthUseCase";
+import { TestUseCaseInterface } from "../application/usecases/TestUseCase";
+import { UserStorageUseCaseInterface } from "../application/usecases/UserStorageUseCase";
 
 export interface AppProps {
   authUseCase: AuthUseCaseInterface;
