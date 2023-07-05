@@ -12,8 +12,48 @@ import { PrivateRoute } from "./components/PrivateRoute";
 import NotFound from "./components/NotFound";
 import { AppProps } from "../App";
 import ErrorSite from "./components/Error";
+import { AUTH_ROUTES, PRIVATE_ROUTES } from "./CONSTANTS";
 
 const Router = (props: AppProps) => {
+  const privateRoutes: any[] = [
+    {
+      path: PRIVATE_ROUTES.SUB.COUNTER,
+      element: <CounterPage />,
+    },
+    {
+      path: PRIVATE_ROUTES.SUB.ADMIN,
+      element: <AdminPage testUseCase={props.testUseCase} />,
+    },
+    {
+      path: PRIVATE_ROUTES.SUB.USER,
+      element: <UserPage testUseCase={props.testUseCase} />,
+    },
+    {
+      path: PRIVATE_ROUTES.SUB.MOD,
+      element: <ModeratorPage testUseCase={props.testUseCase} />,
+    },
+    {
+      path: PRIVATE_ROUTES.SUB.TIME,
+      element: <TimeSleepPage testUseCase={props.testUseCase} />,
+    },
+  ];
+
+  const authRoutes: any[] = [
+    {
+      path: AUTH_ROUTES.SUB.SIGNUP,
+      element: <SignUpPage authenUseCase={props.authUseCase} />,
+    },
+    {
+      path: AUTH_ROUTES.SUB.SIGNIN,
+      element: (
+        <SignInPage
+          userStorage={props.userStorageUseCase}
+          authenUseCase={props.authUseCase}
+        />
+      ),
+    },
+  ];
+
   return (
     <LoadingComponent>
       <Routes>
@@ -22,54 +62,30 @@ const Router = (props: AppProps) => {
           errorElement={<ErrorSite />}
           element={<HomePage userStorageUseCase={props.userStorageUseCase} />}
         />
-        <Route path="/authen">
-          <Route
-            path="signin"
-            errorElement={<ErrorSite />}
-            element={
-              <SignInPage
-                userStorage={props.userStorageUseCase}
-                authenUseCase={props.authUseCase}
-              />
-            }
-          />
-          <Route
-            path="signup"
-            errorElement={<ErrorSite />}
-            element={<SignUpPage authenUseCase={props.authUseCase} />}
-          />
+        <Route path={AUTH_ROUTES.PATH}>
+          {authRoutes.map((element, index) => (
+            <Route
+              key={index}
+              path={element.path}
+              errorElement={<ErrorSite />}
+              element={element.element}
+            />
+          ))}
         </Route>
         <Route
-          path="/app"
+          path={PRIVATE_ROUTES.PATH}
           element={
             <PrivateRoute userStorageUseCase={props.userStorageUseCase} />
           }
         >
-          <Route
-            path="counter"
-            errorElement={<ErrorSite />}
-            element={<CounterPage />}
-          />
-          <Route
-            path="admin"
-            errorElement={<ErrorSite />}
-            element={<AdminPage testUseCase={props.testUseCase} />}
-          />
-          <Route
-            path="user"
-            errorElement={<ErrorSite />}
-            element={<UserPage testUseCase={props.testUseCase} />}
-          />
-          <Route
-            path="mod"
-            errorElement={<ErrorSite />}
-            element={<ModeratorPage testUseCase={props.testUseCase} />}
-          />
-          <Route
-            path="time"
-            errorElement={<ErrorSite />}
-            element={<TimeSleepPage testUseCase={props.testUseCase} />}
-          />
+          {privateRoutes.map((element, index) => (
+            <Route
+              key={index}
+              path={element.path}
+              errorElement={<ErrorSite />}
+              element={element.element}
+            />
+          ))}
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

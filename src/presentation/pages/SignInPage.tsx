@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { AUTHEN, ROOT } from "../router/CONSTANTS";
+import { AUTH_ROUTES, ROOT } from "../router/CONSTANTS";
 import { message } from "antd";
 import { useState } from "react";
 import { SignInData } from "../../domain/entities/Auth";
@@ -51,7 +51,7 @@ export const SignInPage = ({ authenUseCase, userStorage }: props) => {
   };
 
   const toSignupPage = () => {
-    navigate(AUTHEN.SIGNUP);
+    navigate(AUTH_ROUTES.PATH + "/" + AUTH_ROUTES.SUB.SIGNUP);
   };
 
   return (

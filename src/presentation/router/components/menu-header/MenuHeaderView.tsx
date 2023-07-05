@@ -13,33 +13,34 @@ import {
   UserOutlined,
   FieldTimeOutlined,
 } from "@ant-design/icons";
+import { PRIVATE_ROUTES } from "../../CONSTANTS";
 
 const { Header, Content, Footer } = Layout;
 
 const menuItems: MenuProps["items"] = [
   {
     label: "Counter",
-    key: "COUNTER",
+    key: PRIVATE_ROUTES.SUB.COUNTER,
     icon: <CalculatorOutlined />,
   },
   {
     label: "Admin",
-    key: "ADMIN",
+    key: PRIVATE_ROUTES.SUB.ADMIN,
     icon: <UserOutlined />,
   },
   {
     label: "Moderator",
-    key: "MOD",
+    key: PRIVATE_ROUTES.SUB.MOD,
     icon: <UserOutlined />,
   },
   {
     label: "Normal User",
-    key: "USER",
+    key: PRIVATE_ROUTES.SUB.USER,
     icon: <UserOutlined />,
   },
   {
     label: "Time sleep",
-    key: "TIME",
+    key: PRIVATE_ROUTES.SUB.TIME,
     icon: <FieldTimeOutlined />,
   },
 ];

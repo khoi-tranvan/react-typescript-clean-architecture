@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
-import { AUTHEN, ROOT } from "../router/CONSTANTS";
+import { AUTH_ROUTES, ROOT } from "../router/CONSTANTS";
 import { DATE_FORMAT } from "../../infrastructure/config/CONSTANT";
 import { useState } from "react";
 import { SignUpData } from "../../domain/entities/Auth";
@@ -54,7 +54,7 @@ export const SignUpPage = ({ authenUseCase }: props) => {
   };
 
   const toSigninPage = () => {
-    navigate(AUTHEN.SIGNIN);
+    navigate(AUTH_ROUTES.PATH + AUTH_ROUTES.SUB.SIGNIN);
   };
 
   const toHome = () => {
