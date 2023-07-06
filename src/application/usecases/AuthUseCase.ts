@@ -8,15 +8,15 @@ export class AuthUseCase {
     this.authRepo = authenRepo;
   }
 
-  async signin(data: SignInData): Promise<any> {
-    return this.authRepo.signin(data);
+  async signin(data: SignInData, controller: AbortController): Promise<any> {
+    return this.authRepo.signin(data, controller);
   }
-  async signup(data: SignUpData): Promise<any> {
-    return this.authRepo.signup(data);
-  }
+//   async signup(data: SignUpData): Promise<any> {
+//     return this.authRepo.signup(data);
+//   }
 }
 
 export interface AuthUseCaseInterface {
-  signin(data: SignInData): Promise<any>;
-  signup(data: SignUpData): Promise<any>;
+  signin(data: SignInData, controller: AbortController): Promise<any>;
+//   signup(data: SignUpData): Promise<any>;
 }

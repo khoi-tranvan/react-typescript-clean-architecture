@@ -49,6 +49,7 @@ const Router = (props: AppProps) => {
         <SignInPage
           userStorage={props.userStorageUseCase}
           authenUseCase={props.authUseCase}
+          controller={new AbortController()}
         />
       ),
     },

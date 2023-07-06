@@ -5,6 +5,6 @@
 import { SignInData, SignUpData } from "../../domain/entities/Auth";
 
 export interface AuthRepository {
-  signin(data: SignInData): Promise<any>;
-  signup(data: SignUpData): Promise<any>;
+  signin(data: SignInData, controller: AbortController): Promise<any>;
+//   signup(data: SignUpData): Promise<any>;
 }
