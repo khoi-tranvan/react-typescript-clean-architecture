@@ -16,9 +16,10 @@ import { UserStorageUseCaseInterface } from "../../application/usecases/UserStor
 interface props {
     authenUseCase: AuthUseCaseInterface;
     userStorage: UserStorageUseCaseInterface;
+    controller: AbortController
 }
 
-export const SignInPage = ({ authenUseCase, userStorage }: props) => {
+export const SignInPage = ({ authenUseCase, userStorage, controller }: props) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [messageApi, contextHolder] = message.useMessage();
@@ -26,8 +27,6 @@ export const SignInPage = ({ authenUseCase, userStorage }: props) => {
 
     const onFinish = async (values: any) => {
         try {
-            let controller = new AbortController();
-
             const payload: SignInData = {
                 username: values.username,
                 password: values.password,
