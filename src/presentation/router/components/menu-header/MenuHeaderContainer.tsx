@@ -19,7 +19,7 @@ export const MenuHeaderContainer = ({
   const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useAppDispatch();
-  const [userLocal, setUserLocal] = useState<UserToken | null>(null);
+  const [userLocal, setUserLocal] = useState<UserToken | null | undefined>();
   const [chosenItem, setChosenItem] = useState<string[]>([]);
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export const MenuHeaderContainer = ({
     const pathName = location.pathname;
     const pathNameArr = pathName.split("/");
     if (pathNameArr.length > 0 && pathNameArr[pathNameArr.length - 1] !== "") {
-      setChosenItem([pathNameArr[pathNameArr.length - 1].toUpperCase()]);
+      setChosenItem([pathNameArr[pathNameArr.length - 1]]);
     }
   };
 

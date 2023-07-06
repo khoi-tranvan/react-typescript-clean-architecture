@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { message } from "antd";
 import { AUTH_ROUTES, ROOT } from "../router/CONSTANTS";
-import { DATE_FORMAT } from "../../infrastructure/config/CONSTANT";
+import { DATE_FORMAT } from "../../config/CONSTANTS";
 import { useState } from "react";
 import { SignUpData } from "../../domain/entities/Auth";
 import SuccessResult from "../components/SuccessResult";

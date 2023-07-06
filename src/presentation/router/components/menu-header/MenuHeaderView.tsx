@@ -90,7 +90,9 @@ export const MenuHeaderView = ({
           <div></div>
         )}
         <div style={{ display: "flex" }}>
-          {userLocal ? (
+          {userLocal === undefined ? (
+            <></>
+          ) : userLocal ? (
             <Button type="primary" danger onClick={logoutApp}>
               Log out
             </Button>

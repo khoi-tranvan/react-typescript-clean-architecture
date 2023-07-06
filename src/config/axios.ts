@@ -1,11 +1,11 @@
 import axios from "axios";
 import queryString from "query-string";
-import { ENV } from "./CONSTANT";
-import { UserStorage } from "../storage/UserStorage";
+import { ENV } from "./CONSTANTS";
+import { UserStorage } from "../infrastructure/storage/UserStorage";
 // https://lightrains.com/blogs/axios-intercepetors-react/
 
 // control api call
-const controller = new AbortController();
+export const controller = new AbortController();
 const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
 const userStorage = new UserStorage();
