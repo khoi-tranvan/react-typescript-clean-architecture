@@ -7,10 +7,10 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { AuthUseCase } from "./application/usecases/AuthUseCase";
 import { persistor, store } from "./presentation/redux/store";
-import { AuthAPI } from "./infrastructure/api/Auth";
-import { UserStorage } from "./infrastructure/storage/UserStorage";
+import { AuthAPI } from "./infrastructure/apis/AuthAPI";
+import { UserStorage } from "./infrastructure/storages/UserStorage";
 import { UserStorageUseCase } from "./application/usecases/UserStorageUseCase";
-import { TestAPI } from "./infrastructure/api/TestAPI";
+import { TestAPI } from "./infrastructure/apis/TestAPI";
 import { TestUseCase } from "./application/usecases/TestUseCase";
 import App from "./presentation/App";
 

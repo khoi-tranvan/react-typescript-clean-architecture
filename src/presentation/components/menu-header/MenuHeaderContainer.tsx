@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { MenuHeaderView } from "./MenuHeaderView";
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../../../redux/hooks";
-import { AUTH_ROUTES, PRIVATE_ROUTES, ROOT } from "../../CONSTANTS";
-import { logout } from "../../../redux/features/authen/authenSlice";
-import { UserToken } from "../../../../domain/entities/User";
-import { UserStorageUseCaseInterface } from "../../../../application/usecases/UserStorageUseCase";
+import { useAppDispatch } from "../../redux/hooks";
+import { AUTH_ROUTES, PRIVATE_ROUTES, ROOT } from "../../router/CONSTANTS";
+import { logout } from "../../redux/features/authen/authenSlice";
+import { UserToken } from "../../../domain/entities/User";
+import { UserStorageUseCaseInterface } from "../../../application/usecases/UserStorageUseCase";
 
 interface props {
   userStorageUseCase: UserStorageUseCaseInterface;

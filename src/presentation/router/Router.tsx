@@ -7,12 +7,12 @@ import { AdminPage } from "../pages/AdminPage";
 import { UserPage } from "../pages/UserPage";
 import { ModeratorPage } from "../pages/ModeratorPage";
 import { TimeSleepPage } from "../pages/TimeSleepPage";
-import LoadingComponent from "./components/Loading";
-import { PrivateRoute } from "./components/PrivateRoute";
-import NotFound from "./components/NotFound";
 import { AppProps } from "../App";
-import ErrorSite from "./components/Error";
 import { AUTH_ROUTES, PRIVATE_ROUTES } from "./CONSTANTS";
+import LoadingComponent from "../components/Loading";
+import NotFound from "../components/NotFound";
+import ErrorSite from "../components/Error";
+import { PrivateRoute } from "../components/PrivateRoute";
 
 const Router = (props: AppProps) => {
   const privateRoutes: any[] = [

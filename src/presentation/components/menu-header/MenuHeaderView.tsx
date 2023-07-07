@@ -13,7 +13,7 @@ import {
   UserOutlined,
   FieldTimeOutlined,
 } from "@ant-design/icons";
-import { PRIVATE_ROUTES } from "../../CONSTANTS";
+import { PRIVATE_ROUTES } from "../../router/CONSTANTS";
 
 const { Header, Content, Footer } = Layout;
 

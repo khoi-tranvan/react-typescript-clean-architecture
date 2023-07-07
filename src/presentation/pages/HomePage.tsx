@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../redux/hooks";
 import { UserToken } from "../../domain/entities/User";
 import { logout } from "../redux/features/authen/authenSlice";
-import MenuHeader from "../router/components/menu-header";
+import MenuHeader from "../components/menu-header";
 import { HomeView } from "../components/HomeView";
 import { UserStorageUseCaseInterface } from "../../application/usecases/UserStorageUseCase";
 import { AUTH_ROUTES } from "../router/CONSTANTS";

@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { UserStorageUseCaseInterface } from "../../../application/usecases/UserStorageUseCase";
+import { UserStorageUseCaseInterface } from "../../application/usecases/UserStorageUseCase";
 import MenuHeader from "./menu-header";
 
 interface props {

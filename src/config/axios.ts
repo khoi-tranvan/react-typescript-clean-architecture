@@ -1,7 +1,7 @@
 import axios from "axios";
 import queryString from "query-string";
 import { ENV } from "./CONSTANTS";
-import { UserStorage } from "../infrastructure/storage/UserStorage";
+import { UserStorage } from "../infrastructure/storages/UserStorage";
 // https://lightrains.com/blogs/axios-intercepetors-react/
 
 // control api call
