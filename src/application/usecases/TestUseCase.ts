@@ -1,4 +1,4 @@
-import { TimeSleep } from "../../domain/entities/Test";
+import { TimeSleep } from "../../domain/entities/TestEntity";
 import { TestRepository } from "../repositories/TestRepository";
 
 export class TestUseCase {

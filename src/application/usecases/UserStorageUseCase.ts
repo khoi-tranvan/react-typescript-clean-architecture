@@ -1,4 +1,4 @@
-import { UserToken } from "../../domain/entities/User";
+import { UserToken } from "../../domain/entities/UserEntity";
 import { UserStorageRepository } from "../repositories/UserStorageRepository";
 
 export class UserStorageUseCase {

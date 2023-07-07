@@ -2,7 +2,7 @@
 // The purpose of the repository pattern is to abstract away the details of how data is fetched, stored, or manipulated,
 // and provide a clean and consistent API for the application to interact with data
 
-import { SignInData, SignUpData } from "../../domain/entities/Auth";
+import { SignInData, SignUpData } from "../../domain/entities/AuthEntity";
 
 export interface AuthRepository {
   signin(data: SignInData): Promise<any>;

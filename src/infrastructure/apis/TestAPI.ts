@@ -1,6 +1,6 @@
 import { TestRepository } from "../../application/repositories/TestRepository";
-import axiosConfig from "../../config/axios";
-import { TimeSleep } from "../../domain/entities/Test";
+import axiosConfig from "../config/axios";
+import { TimeSleep } from "../models/TestModel";
 
 export class TestAPI implements TestRepository {
   async getModeratorAccess(): Promise<any> {

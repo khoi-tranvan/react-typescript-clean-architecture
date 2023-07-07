@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../redux/hooks";
 import { AUTH_ROUTES, PRIVATE_ROUTES, ROOT } from "../../router/CONSTANTS";
 import { logout } from "../../redux/features/authen/authenSlice";
-import { UserToken } from "../../../domain/entities/User";
+import { UserToken } from "../../../domain/entities/UserEntity";
 import { UserStorageUseCaseInterface } from "../../../application/usecases/UserStorageUseCase";
 
 interface props {

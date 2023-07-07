@@ -1,6 +1,6 @@
-import { SignInData, SignUpData } from "../../domain/entities/Auth";
 import { AuthRepository } from "../../application/repositories/AuthRepository";
-import axiosConfig from "../../config/axios";
+import axiosConfig from "../config/axios";
+import { SignUpData, SignInData } from "../models/AuthModel";
 
 export class AuthAPI implements AuthRepository {
   async signin(data: SignInData): Promise<any> {

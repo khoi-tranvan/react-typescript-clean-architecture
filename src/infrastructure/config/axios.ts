@@ -1,14 +1,16 @@
 import axios from "axios";
 import queryString from "query-string";
 import { ENV } from "./CONSTANTS";
-import { UserStorage } from "../infrastructure/storages/UserStorage";
+import { UserStorage } from "../storages/UserStorage";
 // https://lightrains.com/blogs/axios-intercepetors-react/
 
 // control api call
-export const controller = new AbortController();
+const controller = new AbortController();
 const CancelToken = axios.CancelToken;
 const source = CancelToken.source();
 const userStorage = new UserStorage();
+
+let countFetching = 0;
 
 const axiosConfig = axios.create({
   baseURL: process.env.REACT_APP_API_END_POINT,
@@ -18,8 +20,19 @@ const axiosConfig = axios.create({
   paramsSerializer: (params) => queryString.stringify(params),
 });
 
+const abortFetching = () => {
+  controller.abort();
+  window.location.reload();
+};
+
 axiosConfig.interceptors.request.use(
   (config) => {
+    countFetching++;
+    console.log(countFetching);
+    if (countFetching === 1) {
+      // calling api
+      window.addEventListener("popstate", abortFetching);
+    }
     const token = userStorage.getAccessToken();
     if (token && config.headers) {
       config.headers["Authorization"] = "Bearer " + token;
@@ -36,9 +49,21 @@ axiosConfig.interceptors.request.use(
 
 axiosConfig.interceptors.response.use(
   (response) => {
+    countFetching--;
+    console.log(countFetching);
+
+    if (countFetching === 0) {
+      window.removeEventListener("popstate", abortFetching);
+    }
     return response;
   },
   async (error) => {
+    countFetching--;
+    console.log(countFetching);
+
+    if (countFetching === 0) {
+      window.removeEventListener("popstate", abortFetching);
+    }
     if (!window.navigator.onLine) {
       window.location.reload();
       return;

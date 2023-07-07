@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../redux/hooks";
-import { UserToken } from "../../domain/entities/User";
+import { UserToken } from "../../domain/entities/UserEntity";
 import { logout } from "../redux/features/authen/authenSlice";
 import MenuHeader from "../components/menu-header";
 import { HomeView } from "../components/HomeView";

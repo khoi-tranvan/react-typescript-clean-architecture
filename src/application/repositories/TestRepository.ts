@@ -2,7 +2,7 @@
 // The purpose of the repository pattern is to abstract away the details of how data is fetched, stored, or manipulated,
 // and provide a clean and consistent API for the application to interact with data
 
-import { TimeSleep } from "../../domain/entities/Test";
+import { TimeSleep } from "../../domain/entities/TestEntity";
 
 export interface TestRepository {
   getModeratorAccess(): Promise<any>;

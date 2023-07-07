@@ -31,11 +31,13 @@ Doc: https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.htm
   
   | **infrastructure/**		-> *handling external data implementation*
   
-  --------- | **api/**	-> *implement repositoriees and make calls to external apis*
-  
-  --------- | **storage/** -> *implement repositories and handles local storage in the browser*	
+  --------- | **apis/**	-> *implement repositoriees and make calls to external apis*
     
-  --------- | **config/** -> *config axios (interceptor for response and request) to make api calls*
+  --------- | **models/**	-> *implement repositoriees and make calls to external apis*
+  
+  --------- | **storages/** -> *implement repositories and handles local storage in the browser*	
+    
+  | **config/** -> *config project*
   	
   | **asset/** -> *static contents*
 	
@@ -76,4 +78,144 @@ REACT_APP_API_END_POINT=http://your_api_end_point
 * typescript: 4.9.5
 * web-vitals: 2.1.4
 
+## Convention
+* Coding convention: https://basarat.gitbook.io/typescript/styleguide
+* Git convention
+1. Feature
+	- Tạo MR: feature/[sprint + number]/[code của feature trên redmine]. Ví dụ feature/sprint1/202312
+	- Trường hợp MR là các chức năng thêm của feature đó thì feature/sprint1/202312 nhưng commit sẽ là tên của chức năng thêm vào
+	- Khi tạo MR của feature bắt buộc phải có evidence bằng hình ảnh, link hoặc mô tả cụ thể những gì đã làm
+2. Bugs
+	- Tạo branch: bug/[sprint + number]/[code của bug trên redmine]. Ví dụ bug/sprint1/414144
+	- Trường hợp là bug cần merge gấp thì dùng hotfix ở đầu. Ví dụ hotfix/sprint1/414144
+	- Khi tạo MR của bug bắt buộc phải có evidence bằng hình ảnh, link hoặc mô tả cụ thể những gì đã làm
+* Redmine convention
+- Khi hoàn thành task => assign task cho leader - status in-review - description để link git 
+
+
 ## Coding flow
+1. Tạo model ở infrastructure/models.
+```typescript
+export type SignUpData = {
+  username: string;
+  fullname: string;
+  password: string;
+  address: string;
+  email: string;
+  phonenumber: string;
+  dob: string;
+  roles: number[];
+};
+
+export type SignInData = { username: string; password: string };
+
+```
+2. Tạo các hàm gọi dữ liệu từ bên ngoài như api hoặc localStorage ở trong folder infrastructure. Ví dụ infrastructure/AuthAPI.ts. Lưu ý: khai báo đầy đủ các kiểu dữ liệu, không sử dụng any làm param và data
+```typescript
+import { AuthRepository } from "../../application/repositories/AuthRepository";
+import axiosConfig from "../../config/axios";
+import { SignUpData, SignInData } from "../models/AuthModel";
+
+export class AuthAPI implements AuthRepository {
+  async signin(data: SignInData): Promise<any> {
+    const API_URL = "/sign-in";
+    const response = await axiosConfig.post(API_URL, data);
+    return response.data;
+  }
+  async signup(data: SignUpData): Promise<any> {
+    const API_URL = "/sign-up";
+    const response = await axiosConfig.post(API_URL, data);
+    return response.data;
+  }
+}
+```
+
+3. Tạo entities xử lý business logic (trong ví dụ thì models và entites giống nhau vì còn đơn giản, khi nghiệp vụ phức tạp, sẽ có trường hợp kết hợp nhiều api trả về để tạo thành 1 entities duy nhất để xử lý nghiệp vụ). domain/entities/AuthEntity.ts
+```typescript
+export type SignUpData = {
+  username: string;
+  fullname: string;
+  password: string;
+  address: string;
+  email: string;
+  phonenumber: string;
+  dob: string;
+  roles: number[];
+};
+
+export type SignInData = { username: string; password: string };
+
+```
+
+4. Tạo lớp trừu tượng ở application/repositoriees/AuthRepository
+```typescript
+// Define interfaces that present the contracts for data access and persistence operations related to the domain eities.
+// The purpose of the repository pattern is to abstract away the details of how data is fetched, stored, or manipulated,
+// and provide a clean and consistent API for the application to interact with data
+
+import { SignInData, SignUpData } from "../../domain/entities/AuthEntity";
+
+export interface AuthRepository {
+  signin(data: SignInData): Promise<any>;
+  signup(data: SignUpData): Promise<any>;
+}
+
+```
+
+5. Tạo usecase và các trừu tượng của nó trong usecases. application/usecases/AuthUseCase
+```typescript
+import { SignInData, SignUpData } from "../../domain/entities/AuthEntity";
+import { AuthRepository } from "../repositories/AuthRepository";
+
+export class AuthUseCase {
+  private authRepo: AuthRepository;
+
+  constructor(authenRepo: AuthRepository) {
+    this.authRepo = authenRepo;
+  }
+
+  async signin(data: SignInData): Promise<any> {
+    return this.authRepo.signin(data);
+  }
+  async signup(data: SignUpData): Promise<any> {
+    return this.authRepo.signup(data);
+  }
+}
+
+export interface AuthUseCaseInterface {
+  signin(data: SignInData): Promise<any>;
+  signup(data: SignUpData): Promise<any>;
+}
+```
+
+6. Tạo thư mục presentation để xử lý UI (do file quá dài nên mong bạn đọc xem ở trong code)
+7. Khai báo toàn bộ infra -> usecase -> presentation ở trong index.ts
+```typescript
+const authRepository = new AuthAPI();
+const userStorage = new UserStorage();
+const testRepository = new TestAPI();
+
+const testUseCase = new TestUseCase(testRepository);
+const userStorageUseCase = new UserStorageUseCase(userStorage);
+const authUseCase = new AuthUseCase(authRepository);
+
+const root = ReactDOM.createRoot(
+  document.getElementById("root") as HTMLElement
+);
+root.render(
+  <React.StrictMode>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <BrowserRouter>
+          <App
+            userStorageUseCase={userStorageUseCase}
+            testUseCase={testUseCase}
+            authUseCase={authUseCase}
+          />
+        </BrowserRouter>
+      </PersistGate>
+    </Provider>
+  </React.StrictMode>
+);
+```
+

@@ -1,5 +1,5 @@
 import { UserStorageRepository } from "../../application/repositories/UserStorageRepository";
-import { UserToken } from "../../domain/entities/User";
+import { UserToken } from "../../domain/entities/UserEntity";
 
 export class UserStorage implements UserStorageRepository {
   getUserInfo(): UserToken | null {

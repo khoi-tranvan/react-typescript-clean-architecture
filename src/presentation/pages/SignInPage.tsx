@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { AUTH_ROUTES, ROOT } from "../router/CONSTANTS";
 import { message } from "antd";
 import { useState } from "react";
-import { SignInData } from "../../domain/entities/Auth";
+import { SignInData } from "../../domain/entities/AuthEntity";
 import SignInForm from "../components/SignInnForm";
 import { AuthUseCaseInterface } from "../../application/usecases/AuthUseCase";
 import { useAppDispatch } from "../redux/hooks";

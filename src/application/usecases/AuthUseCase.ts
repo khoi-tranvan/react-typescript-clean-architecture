@@ -1,4 +1,4 @@
-import { SignInData, SignUpData } from "../../domain/entities/Auth";
+import { SignInData, SignUpData } from "../../domain/entities/AuthEntity";
 import { AuthRepository } from "../repositories/AuthRepository";
 
 export class AuthUseCase {
